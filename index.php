@@ -3,11 +3,13 @@
 require './src/Classes/Compte.php';
 require './src/Classes/Toto.php';
 require './src/Classes/Tools.php';
+require './src/Classes/Radio.php';
 //include './src/includes/autoload.php';
 
 use App\Compte;
 use Toto\Toto;
 use Utils\Tools;
+use Media\Radio;
 
 ?>
 <!DOCTYPE html>
@@ -127,6 +129,46 @@ use Utils\Tools;
                 /* appel à une méthode statique */
                 Tools::prePrint(Tools::circo(5));
 
+                ?>
+            </article>
+            <article>
+                <header>
+                    <h2>TD Classe Radio</h2>
+                </header>
+                <p>
+                    Une radio uniquement sur labande FM
+                </p>
+                <h3>Attributs</h3>
+                <ul>
+                    <li>marque</li>
+                    <li>modele</li>
+                    <li>volume</li>
+                    <li>frequenceFm</li>
+                    <li>frequenceActuelle</li>
+                    <li>limiteDb</li>
+                </ul>
+                <h3>Méthodes</h3>
+                <ul>
+                    <li>modifierVolume</li>
+                    <li>modifierFrequence</li>
+                </ul>
+                <?php
+                $maRadio = new Radio('Radiola', 'Vintage memory');
+                prePrint($maRadio);
+                $maRadio->modifierVolume(+25);
+                prePrint($maRadio->getVolume());
+                $maRadio->modifierVolume(+25);
+                prePrint($maRadio->getVolume());
+                $maRadio->modifierVolume(+25);
+                prePrint($maRadio->getVolume());
+                $maRadio->modifierVolume(-100);
+                prePrint($maRadio->getVolume());
+                $maRadio->modifierFrequence(12.8);
+                prePrint($maRadio->getFrequenceActuelle());
+                $maRadio->modifierFrequence(22.8);
+                prePrint($maRadio->getFrequenceActuelle());
+                $maRadio->modifierFrequence(-22.8);
+                prePrint($maRadio->getFrequenceActuelle());
                 ?>
             </article>
         </section>

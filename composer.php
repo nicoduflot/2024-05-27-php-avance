@@ -1,9 +1,6 @@
 <?php
-
 require './vendor/autoload.php';
-
 use Utils\Tools;
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">

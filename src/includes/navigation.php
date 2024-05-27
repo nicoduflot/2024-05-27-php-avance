@@ -1,3 +1,6 @@
+<?php
+use Utils\Tools;
+?>
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -7,28 +10,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link <?php  ?>" href="./index.php" title="Page d'accueil du site">Accueil</a>
+                    <a class="nav-link <?php Tools::classActive('index.php') ?>" href="./index.php" title="Page d'accueil du site">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./composer.php" title="Utilisation de composer">Composer</a>
+                    <a class="nav-link <?php Tools::classActive('composer.php') ?>" href="./composer.php" title="Utilisation de composer">Composer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./collection.php" title="Utilisation des collections">Les collections</a>
+                    <a class="nav-link <?php Tools::classActive('collections.php') ?>" href="./collection.php" title="Utilisation des collections">Les collections</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./pdo.php" title="Utilisation de PDO">PDO</a>
+                    <a class="nav-link <?php Tools::classActive('pdo.php') ?>" href="./pdo.php" title="Utilisation de PDO">PDO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./classesetendues.php" title="Les classes étendues">Classes étendues</a>
+                    <a class="nav-link <?php Tools::classActive('classesetendues.php') ?>" href="./classesetendues.php" title="Les classes étendues">Classes étendues</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./classesetpdo.php" title="Les classes et PDO">Classe et PDO</a>
+                    <a class="nav-link <?php Tools::classActive('classesetpdo.php') ?>" href="./classesetpdo.php" title="Les classes et PDO">Classe et PDO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./exceptions.php" title="Les exceptions">Exceptions</a>
+                    <a class="nav-link <?php Tools::classActive('exceptions.php') ?>" href="./exceptions.php" title="Les exceptions">Exceptions</a>
                 </li>
             </ul>
-            
         </div>
     </div>
 </nav>
