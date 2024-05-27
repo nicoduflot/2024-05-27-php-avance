@@ -1,0 +1,138 @@
+<?php
+/* Pour appeler une classe sans utiliser un autoload (généralement avec composer) */
+require './src/Classes/Compte.php';
+require './src/Classes/Toto.php';
+require './src/Classes/Tools.php';
+//include './src/includes/autoload.php';
+
+use App\Compte;
+use Toto\Toto;
+use Utils\Tools;
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation PHP Avancé - Accueil</title>
+    <?php
+    include './src/includes/headcalls.php';
+    ?>
+    <?php
+    include './src/includes/functions.php';
+    ?>
+</head>
+<body>
+    <?php
+    include './src/includes/header.php';
+    ?>
+    <?php
+    include './src/includes/navigation.php';
+    ?>
+    <main class="container">
+        <section>
+            <article>
+                <header>
+                    <h2>Principes de la POO</h2>
+                </header>
+                <p>
+                    Un objet est la réprésentation de quelque chose de matériel ou non à laquelle on associe des propriétés et des actions.
+                </p>
+                <p>
+                    Une voiture, un compte bancaire, un personnage, etc peuvent être définis en tant qu'objets.
+                </p>
+                <p>
+                    Un objet est défini par des attributs et des méthodes.
+                </p>
+                <h3>Attribut</h3>
+                <p>
+                    Les attributs sont des éléments ou caractères propres à l'objet.
+                </p>
+                <p>
+                    Un compte bancaire, aura par exemple :
+                </p>
+                <ul>
+                    <li>La civilité nom, prénom du détenteur</li>
+                    <li>le solde</li>
+                    <li>le numéro d'agence</li>
+                    <li>Le rib</li>
+                    <li>l'iban</li>
+                </ul>
+                <h3>Les méthodes</h3>
+                <p>
+                    Les actions ou capacités applicable à l'objet.
+                </p>
+                <p>
+                    Le compte bancaire de base aura comme méthodes :
+                </p>
+                <ul>
+                    <li>Modifier le solde</li>
+                    <li>Effectuer un virement vers un autre objet de type compte</li>
+                    <li>Info sur le compte</li>
+                </ul>
+                <h3>Instance</h3>
+                <p>
+                    Un objet est une instance d'une classe. La classe défini l'objet, ses attributs et ses méthodes ainsi qu'un constructeur. C'est le constructeur qui gère la création de l'objet final.
+                </p>
+                <h3>Encapsulation</h3>
+                <p>
+                    Les attributs et les méthodes de l'objet sont donc encapsulés dans la classe. L'utilisateur de l'objet ne doit pas modifier le code de la classe mais utilisera l'objet via ses méthodes. En général il n'utilise pas directement ses attributs, ils seront <q>privés</q>
+                </p>
+                <h3>Créer la classe <q>Compte</q></h3>
+                <p>
+                    On crée les attributs en privé
+                </p>
+                <p>
+                    On crée ensuite le <q>constructor</q>
+                </p>
+                <p>
+                    Le constructeur sert a contruire l'objet lors de son instantiation. Il peut contenir du code et il définit les variables a renseigner lors de l'instanciation.
+                </p>
+                <p>
+                    Comme les attributs sont privés, il faut, pour pouvoir les lire et / ou les modifier, créer des méthodes particulières, nommées getter ( ou Assesseur, pour les lire) et setter (ou Mutateur, pour les modifier).
+                </p>
+                <?php
+                $compte = new Compte('Duflot', 'Nico', 'CCP-987654', '0123456', 'MON RIB', 'MON IBAN FR', 2500);
+                prePrint($compte);
+                prePrint($compte->toto);
+                prePrint($compte->getNom());
+                $compte->setPrenom('Nicolas');
+                prePrint($compte);
+
+                echo $compte->infoCompte();
+
+                $compteDestinataire = new Compte('Dusse', 'Jean-claude', 'CCP-654321', '987654', 'RIB', 'IBAN', 1500);
+                prePrint($compteDestinataire);
+                $compte->virement(25, $compteDestinataire);
+                prePrint($compteDestinataire);
+
+                prePrint($compte->typeCompte());
+
+                prePrint($compte->showAttr());
+
+                ?>
+                <h2>Les classes statiques</h2>
+                <p>
+                    Se sont des classes, généralement sans constructeur, qui contiennent une série de méthodes que l'on peut invoquer sans avoir besoin de créer une instance de la classe.
+                </p>
+                <p>
+                    Il est d'ailleurs IMPOSSIBLE de créer une instance de classe si elle ne possèdent pas de constructeur
+                </p>
+                <?php
+
+                /* appel à un attribut statique */
+                prePrint(Tools::$pi);
+
+                /* appel à une méthode statique */
+                Tools::prePrint(Tools::circo(5));
+
+                ?>
+            </article>
+        </section>
+    </main>
+    <?php
+    include './src/includes/footer.php';
+    ?>
+</body>
+</html>
