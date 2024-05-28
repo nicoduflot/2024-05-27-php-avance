@@ -188,6 +188,83 @@ use Doctrine\Common\Collections\ArrayCollection;
                         <button class="btn btn-outline-primary" name="soumettre" type="submit" value="soumettre">Rechercher</button>
                     </p>
                 </form>
+                <?php
+                /* variables pour les association de conditions */
+                $conditions = '';
+                $nbConditions = 0;
+                $case = null;
+                $tabField = [];
+                $tabCondition = new ArrayCollection();
+
+                if( isset($_GET['soumettre']) && $_GET['soumettre'] === 'soumettre' ){
+                    if( isset($_GET['possesseur']) && $_GET['possesseur'] !== '' ){
+                        $tabField['possesseur'] = $_GET['possesseur'];
+                        $tabCondition->add(' `possesseur` = :possesseur ');
+                    }
+                    
+                    if( isset($_GET['prixmax']) && $_GET['prixmax'] !== '' ){
+                        $tabField['prixmax'] = $_GET['prixmax'];
+                        $tabCondition->add(' `prix` <= :prixmax ');
+                    }
+                    
+                    if( isset($_GET['console']) && $_GET['console'] !== '' ){
+                        $tabField['console'] = $_GET['console'];
+                        $tabCondition->add(' `console` = :console ');
+                    }
+                }
+
+                /* gestions des conditions de recherche */
+
+                if($tabCondition->count() > 0){
+                    for($i = 0; $i < $tabCondition->count(); $i++){
+                        $conditions .= ($i === 0)? ' WHERE ': ' AND ';
+                        $conditions .= $tabCondition[$i];
+                    }
+                }
+
+                $sql = 'SELECT * FROM `jeux_video`' . $conditions . ' ORDER BY `nom`;';
+
+                Tools::prePrint($sql);
+
+                Tools::prePrint($tabField);
+
+                $req = $bdd->prepare($sql);
+                $req->execute($tabField);
+
+                ?>
+                <div class="table-responsive" style="height: 300px;">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Jeu</th>
+                                <th>Possesseur</th>
+                                <th>Prix</th>
+                                <th>Console</th>
+                                <th>nb joueurs max</th>
+                                <th>Commentaire(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while($donnees = $req->fetch()){
+                                ?>
+                                <tr>
+                                    <td><?php echo $donnees['nom'] ?></td>
+                                    <td><?php echo $donnees['possesseur'] ?></td>
+                                    <td><?php echo $donnees['prix'] ?></td>
+                                    <td><?php echo $donnees['console'] ?></td>
+                                    <td><?php echo $donnees['nbre_joueurs_max'] ?></td>
+                                    <td><?php echo $donnees['commentaires'] ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php
+                $req->closeCursor();
+                ?>
             </article>
         </section>
     </main>
