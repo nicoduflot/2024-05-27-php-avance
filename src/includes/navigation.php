@@ -16,7 +16,7 @@ use Utils\Tools;
                     <a class="nav-link <?php Tools::classActive('composer.php') ?>" href="./composer.php" title="Utilisation de composer">Composer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php Tools::classActive('collections.php') ?>" href="./collection.php" title="Utilisation des collections">Les collections</a>
+                    <a class="nav-link <?php Tools::classActive('collections.php') ?>" href="./collections.php" title="Utilisation des collections">Les collections</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php Tools::classActive('pdo.php') ?>" href="./pdo.php" title="Utilisation de PDO">PDO</a>

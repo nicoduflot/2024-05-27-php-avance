@@ -1,13 +1,11 @@
 <?php
 /* Pour appeler une classe sans utiliser un autoload (généralement avec composer) */
 require './src/Classes/Compte.php';
-require './src/Classes/Toto.php';
 require './src/Classes/Tools.php';
 require './src/Classes/Radio.php';
 //include './src/includes/autoload.php';
 
 use App\Compte;
-use Toto\Toto;
 use Utils\Tools;
 use Media\Radio;
 
@@ -136,7 +134,7 @@ use Media\Radio;
                     <h2>TD Classe Radio</h2>
                 </header>
                 <p>
-                    Une radio uniquement sur labande FM
+                    Une radio uniquement sur la bande FM
                 </p>
                 <h3>Attributs</h3>
                 <ul>
