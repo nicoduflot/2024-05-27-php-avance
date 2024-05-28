@@ -7,7 +7,7 @@ $formSup = false;
 $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
 if(isset($_GET['action']) && isset($_GET['idJV']) && $_GET['idJV'] && isset($_GET['idJV']) && $_GET['idJV'] !== ''){
     $idJV = ['id' => $_GET['idJV']];
-    if($_GET['action'] !== '' && $_GET['action'] === 'mod'){
+    if($_GET['action'] !== ''){
         $sql = 'SELECT * FROM `jeux_video` WHERE ID = :id';
         $req = $bdd->prepare($sql);
         $req->execute($idJV);
@@ -23,11 +23,13 @@ if(isset($_GET['action']) && isset($_GET['idJV']) && $_GET['idJV'] && isset($_GE
         $commentaires = $jeuMod['commentaires'];
         $id = $idJV['id'];
 
-        $formMod = true;
-    }
-    if($_GET['action'] !== '' && $_GET['action'] === 'sup'){
+        if($_GET['action'] === 'mod'){
+            $formMod = true;
 
-        $formSup = true;
+        }
+        if($_GET['action'] === 'sup'){
+            $formSup = true;
+        }
     }
 }
 
@@ -47,6 +49,18 @@ if(isset($_POST['modJeu']) && $_POST['modJeu'] === 'modJeu' ){
     ID = :ID;';
     $params = $_POST;
     unset($params['modJeu']);
+    $req = $bdd->prepare($sql);
+    $req->execute($params) or die(Tools::prePrint($bdd->errorInfo()));
+
+    header('location: ./pdo.php');
+}
+
+if(isset($_POST['supJeu']) && $_POST['supJeu'] === 'supJeu' ){
+    $sql = 'DELETE FROM `jeux_video` '.
+    'WHERE 
+    ID = :ID;';
+    $params = $_POST;
+    unset($params['supJeu']);
     $req = $bdd->prepare($sql);
     $req->execute($params) or die(Tools::prePrint($bdd->errorInfo()));
 
@@ -111,9 +125,20 @@ if(isset($_POST['modJeu']) && $_POST['modJeu'] === 'modJeu' ){
                         </p>
                     </form>
                     <?php
-                }else{
-
-                } ?>
+                }
+                if($formSup){
+                    ?>
+                    <form method="post" action="./actionJV.php">
+                        <input type="hidden" name="ID" value="<?php echo $id ?>" />
+                        Êtes-vous sûr de vouloir supprimer le jeu suivant : <b><?php echo $nom ?></b> ?
+                        <p class="my-2">
+                            <button class="btn btn-outline-danger" name="supJeu" type="submit" value="supJeu">Supprimer le jeu</button>
+                            <a href="./pdo.php"><button class="btn btn-outline-secondary" type="button">Annuler</button></a>
+                        </p>
+                    </form>
+                    <?php
+                }
+                ?>
             </article>
         </section>
     </main>
