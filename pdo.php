@@ -121,7 +121,7 @@ use Doctrine\Common\Collections\ArrayCollection;
                     dans un tableau généré par une boucle
                 </p>
                 <?php
-                $response = $bdd->query('SELECT * FROM `jeux_video` ORDER BY `nom`');
+                $response = $bdd->query('SELECT * FROM `jeux_video` ORDER BY `ID` DESC');
                 ?>
                 <div class="table-responsive" style="height: 300px;">
                     <table class="table table-dark table-striped">
@@ -148,12 +148,8 @@ use Doctrine\Common\Collections\ArrayCollection;
                                     <td><?php echo $donnees['nbre_joueurs_max'] ?></td>
                                     <td><?php echo $donnees['commentaires'] ?></td>
                                     <td style="width: 250px;">
-                                        <a href="./actionJV.php?action=mod&idJV=<?php echo $donnees['ID'] ?>">
-                                            <button class="btn btn-primary">Modifier</button>    
-                                        </a> 
-                                        <a href="./actionJV.php?action=sup&idJV=<?php echo $donnees['ID'] ?>">
-                                            <button class="btn btn-danger">Supprimer</button>
-                                        </a>
+                                        <a href="./actionJV.php?action=mod&idJV=<?php echo $donnees['ID'] ?>"><button class="btn btn-primary">Modifier</button></a> 
+                                        <a href="./actionJV.php?action=sup&idJV=<?php echo $donnees['ID'] ?>"><button class="btn btn-danger">Supprimer</button></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -264,6 +260,98 @@ use Doctrine\Common\Collections\ArrayCollection;
                 </div>
                 <?php
                 $req->closeCursor();
+                ?>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>Manipulation des enragistrements</h2>
+                </header>
+                <h3>Ajoût de données</h3>
+                <form method="post">
+                    <fieldset class="form-group my-2">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" name="nom" id="nom" />
+                    </fieldset>
+                    <fieldset class="form-group my-2">
+                        <label for="possesseur" class="form-label">Possesseur</label>
+                        <input type="text" class="form-control" name="possesseur" id="possesseur" />
+                    </fieldset>
+                    <fieldset class="form-group my-2">
+                        <label for="console" class="form-label">COnsole</label>
+                        <input type="text" class="form-control" name="console" id="console" />
+                    </fieldset>
+                    <fieldset class="form-group my-2">
+                        <label for="prix" class="form-label">Prix</label>
+                        <input type="text" class="form-control" name="prix" id="prix" />
+                    </fieldset>
+                    <fieldset class="form-group my-2">
+                        <label for="nbJmax" class="form-label">Nombre de joueurs max</label>
+                        <input type="text" class="form-control" name="nbJmax" id="nbJmax" />
+                    </fieldset>
+                    <fieldset class="form-group my-2">
+                        <label for="commentaires" class="form-label">Commentaire</label>
+                        <input type="text" class="form-control" name="commentaires" id="commentaires" />
+                    </fieldset>
+                    <p class="my-2">
+                        <button class="btn btn-outline-primary" name="ajoutJeu" type="submit" value="ajoutJeu">Ajouter le jeu</button>
+                    </p>
+                </form>
+                <?php
+                /* les champs qui seront effectivements renseigné lors l'insertion */
+                $tabField = [];
+
+                /* gestion des champs pour la requête préparée */
+
+                if( isset($_POST['ajoutJeu']) && $_POST['ajoutJeu'] === 'ajoutJeu' ){
+                    if( isset($_POST['nom']) && $_POST['nom'] !== '' ){
+                        $tabField['nom'] = $_POST['nom'];
+                    }
+                    if( isset($_POST['possesseur']) && $_POST['possesseur'] !== '' ){
+                        $tabField['possesseur'] = $_POST['possesseur'];
+                    }
+                    
+                    if( isset($_POST['console']) && $_POST['console'] !== '' ){
+                        $tabField['console'] = $_POST['console'];
+                    }
+                    
+                    if( isset($_POST['prix']) && $_POST['prix'] !== '' ){
+                        $tabField['prix'] = $_POST['prix'];
+                    }
+                    
+                    if( isset($_POST['nbJmax']) && $_POST['nbJmax'] !== '' ){
+                        $tabField['nbre_joueurs_max'] = $_POST['nbJmax'];
+                    }
+                    
+                    if( isset($_POST['commentaires']) && $_POST['commentaires'] !== '' ){
+                        $tabField['commentaires'] = $_POST['commentaires'];
+                    }
+
+                    $keys = '(';
+                    $values = '(';
+                    $i = 0;
+                    foreach($tabField as $key => $value){
+                        echo $key.' : '.$value.'</br>';
+                        if($i !== 0){
+                            $keys .= ',';
+                            $values .= ',';
+                        }
+                        $i++;
+                        $keys .= $key;
+                        $values .= ':'.$key;
+                    }
+
+                    $keys .= ')';
+                    $values .= ')';
+
+                    $sql = 'INSERT INTO `jeux_video` '. $keys .' VALUES '. $values .' ;';
+
+                    Tools::prePrint($sql);
+
+                    $req = $bdd->prepare($sql);
+                    $req->execute($tabField) or die(Tools::prePrint($bdd->errorInfo())) ;
+                    
+                }
+
                 ?>
             </article>
         </section>
