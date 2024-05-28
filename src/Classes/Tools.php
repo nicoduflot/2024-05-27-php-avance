@@ -1,6 +1,8 @@
 <?php
 
 namespace Utils;
+use PDO;
+use Exception;
 
 class Tools{
     static $pi = 3.1415926535898;
@@ -26,5 +28,15 @@ class Tools{
         if(basename ($_SERVER['PHP_SELF']) === $page){
             echo 'active';
         }
+    }
+
+    public static function setBdd($host, $dbname, $user = 'root', $psw = ''){
+        try{
+            $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=UTF8', $user, $psw, array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
+        }
+        catch(Exception $e){
+            die('Erreur de connexion : '. $e->getMessage());
+        };
+        return $bdd;
     }
 }
