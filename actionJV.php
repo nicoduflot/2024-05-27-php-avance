@@ -90,10 +90,11 @@ if(isset($_POST['supJeu']) && $_POST['supJeu'] === 'supJeu' ){
         <section class="row">
             <article class="col-lg-6 offset-lg-3">
                 <header>
-                    <h2>ee</h2>
+                    <h2>Gestion des jeux</h2>
                 </header>
                 <?php if($formMod){
                     ?>
+                    <h3>Modifier le jeu <?php echo $nom ?></h3>
                     <form method="post" action="./actionJV.php">
                         <input type="hidden" name="ID" value="<?php echo $id ?>" />
                         <fieldset class="form-group my-2">
@@ -128,6 +129,7 @@ if(isset($_POST['supJeu']) && $_POST['supJeu'] === 'supJeu' ){
                 }
                 if($formSup){
                     ?>
+                    <h3>Modifier le jeu <?php echo $nom ?></h3>
                     <form method="post" action="./actionJV.php">
                         <input type="hidden" name="ID" value="<?php echo $id ?>" />
                         Êtes-vous sûr de vouloir supprimer le jeu suivant : <b><?php echo $nom ?></b> ?
