@@ -4,6 +4,8 @@ use Utils\Tools;
 use Doctrine\Common\Collections\ArrayCollection;
 use Oeuvres\Oeuvre;
 use Oeuvres\Livre;
+use Oeuvres\Film;
+use Oeuvres\Personne;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -64,6 +66,7 @@ use Oeuvres\Livre;
                     Livre est une classe enfant d'Oeuvre. Livre aura les attribut supplémentaires suivants
                 </p>
                 <ul>
+                    <li>résumé</li>
                     <li>format</li>
                     <li>genre</li>
                     <li>isbn</li>
@@ -79,14 +82,51 @@ use Oeuvres\Livre;
                     <h2>L'objet Film, un type d'oeuvre</h2>
                 </header>
                 <p>
-                    Film est une classe enfant d'Oeuvre. Livre aura les attribut supplémentaires suivants
+                    Film est une classe enfant d'Oeuvre. 
+                    Film aura les attributs supplémentaires suivants
                 </p>
                 <ul>
-                    <li>Casting (tableau de Personne)</li>
+                    <li>Casting (tableau de Role)</li>
+                    <li>synopsis</li>
                     <li>support</li>
                     <li>genre</li>
                 </ul>
+                <p>
+                    Et des méthodes de gestion du casting
+                </p>
+                <ul>
+                    <li>ajouter acteur - personnage casting</li>
+                    <li>retirer acteur - personnage casting</li>
+                </ul>
                 <?php
+                $film = new Film('Rambo', 'Un vétéran prends cher', 'C\'était pas ma guerre', 'Dvd', 'Drame');
+                $film->ajouterActeur(new Personne('Stallone', 'Sylvester', '', ''));
+                $film->ajoutcreateur('Kotcheff', 'Ted', '');
+                tools::prePrint($film);
+                ?>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>L'objet Périodique, un type d'oeuvre</h2>
+                </header>
+                <p>
+                    Periodique est une classe enfant d'Oeuvre. 
+                    Periodique aura les attributs supplémentaires suivants
+                </p>
+                <ul>
+                    <li>Intervenants (tableau de Role)</li>
+                    <li>periodicite</li>
+                    <li>theme</li>
+                </ul>
+                <p>
+                    Et des méthodes de gestion du casting
+                </p>
+                <ul>
+                    <li>ajouter intervenant - role staff</li>
+                    <li>retirer intervenant - rolle staff</li>
+                </ul>
+                <?php
+                
                 ?>
             </article>
         </section>

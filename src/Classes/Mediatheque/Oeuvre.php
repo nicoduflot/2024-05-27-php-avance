@@ -84,7 +84,7 @@ class Oeuvre{
     }
 
     public function ajoutcreateur($nom, $prenom = '', $bio = ''){
-        $this->createurs = new Createur($nom, $prenom, $bio);
+        $this->setCreateurs(new Createur($nom, $prenom, $bio));
     }
 
 }
