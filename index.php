@@ -95,7 +95,6 @@ use Media\Radio;
                 <?php
                 $compte = new Compte('Duflot', 'Nico', 'CCP-987654', '0123456', 'MON RIB', 'MON IBAN FR', 2500);
                 prePrint($compte);
-                prePrint($compte->toto);
                 prePrint($compte->getNom());
                 $compte->setPrenom('Nicolas');
                 prePrint($compte);

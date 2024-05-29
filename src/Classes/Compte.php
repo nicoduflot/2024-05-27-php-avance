@@ -12,7 +12,6 @@ class Compte{
     private $iban;
     private $solde;
     private $devise;
-    public $toto;
 
     /**
      * Compte constructor
@@ -44,7 +43,6 @@ class Compte{
         $this->iban = $iban;
         $this->solde = $solde;
         $this->devise = $devise;
-        $this->toto = 'tata';
     }
 
     /* getters et setters */
@@ -249,7 +247,7 @@ class Compte{
     /**
      * @param float montant
      */
-    private function modifierSolde($montant) : bool
+    public function modifierSolde($montant) : bool
     {
         $this->setSolde( $this->getSolde() + $montant);
         return true;
@@ -259,12 +257,15 @@ class Compte{
      * @param float montant
      * @param destinataire object
      */
-    public function virement($montant, $destinataire) : bool{
-        if( !is_float($montant) && $montant <= 0 ){
-            trigger_error('Le montant doit être un nombre strictement supérieur à 0', E_USER_WARNING);
+    public function virement($montant, $destinataire) : string{
+        $message = '';
+        if( (!is_float($montant) && !is_int($montant) ) && $montant <= 0 ){
+            $message .= 'Le montant doit être un nombre strictement supérieur à 0';
+            return $message;
         }
+        $this->modifierSolde(-$montant);
         $destinataire->modifierSolde($montant);
-        return true;
+        return $message;
     }
 
     /**
