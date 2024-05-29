@@ -10,6 +10,7 @@ use Oeuvres\Createur;
 
 class Oeuvre{
     /* Attribut */
+    private $uniqueid;
     private $titre;
     private $createurs;
     private $description;
@@ -19,6 +20,7 @@ class Oeuvre{
         $this->titre = $titre;
         $this->description = $description;
         $this->createurs = [];
+        $this->uniqueid = time().'-'.$titre;
     }
 
     /**
@@ -81,5 +83,8 @@ class Oeuvre{
         return $this;
     }
 
-    
+    public function ajoutcreateur($nom, $prenom = '', $bio = ''){
+        $this->createurs = new Createur($nom, $prenom, $bio);
+    }
+
 }

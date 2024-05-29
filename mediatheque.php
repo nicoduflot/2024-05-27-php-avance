@@ -2,6 +2,8 @@
 require './vendor/autoload.php';
 use Utils\Tools;
 use Doctrine\Common\Collections\ArrayCollection;
+use Oeuvres\Oeuvre;
+use Oeuvres\Livre;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,7 +49,44 @@ use Doctrine\Common\Collections\ArrayCollection;
                 </p>
                 <h3>La classe Oeuvre</h3>
                 <?php
-                echo time();
+                $oeuvre = new Oeuvre('Les zinzins d\'Olive Oued');
+                $oeuvre->ajoutcreateur('Pratchett', 'Terry');
+                Tools::prePrint($oeuvre);
+                ?>
+            </article>
+        </section>
+        <section class="row">
+            <article class="col-lg-6">
+                <header>
+                    <h2>L'objet Livre, un type d'oeuvre</h2>
+                </header>
+                <p>
+                    Livre est une classe enfant d'Oeuvre. Livre aura les attribut supplémentaires suivants
+                </p>
+                <ul>
+                    <li>format</li>
+                    <li>genre</li>
+                    <li>isbn</li>
+                </ul>
+                <?php
+                $livre = new Livre('Les zinzins d\'Olive Oued', 'Le médiéval-fantastique invente le cinéma', 'Les alchimiste d\'Ank Morpork inventent le celuloid et la guilde des artisans la machine pour projeter les images, les marchands inventent Olive Oued', 'Poche', 'Médieval-fantastique');
+                $livre->ajoutcreateur('Pratchett', 'Terry');
+                Tools::prePrint($livre);
+                ?>
+            </article>
+            <article class="col-lg-6">
+                <header>
+                    <h2>L'objet Film, un type d'oeuvre</h2>
+                </header>
+                <p>
+                    Film est une classe enfant d'Oeuvre. Livre aura les attribut supplémentaires suivants
+                </p>
+                <ul>
+                    <li>Casting (tableau de Personne)</li>
+                    <li>support</li>
+                    <li>genre</li>
+                </ul>
+                <?php
                 ?>
             </article>
         </section>
