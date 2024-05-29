@@ -5,7 +5,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Oeuvres\Oeuvre;
 use Oeuvres\Livre;
 use Oeuvres\Film;
+use Oeuvres\Role;
 use Oeuvres\Personne;
+use Oeuvres\Periodique;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -100,7 +102,7 @@ use Oeuvres\Personne;
                 </ul>
                 <?php
                 $film = new Film('Rambo', 'Un vétéran prends cher', 'C\'était pas ma guerre', 'Dvd', 'Drame');
-                $film->ajouterActeur(new Personne('Stallone', 'Sylvester', '', ''));
+                $film->ajouterActeur(new Role('John Rambo', new Personne('Stallone', 'Sylvester', '', '')));
                 $film->ajoutcreateur('Kotcheff', 'Ted', '');
                 tools::prePrint($film);
                 ?>
@@ -126,7 +128,10 @@ use Oeuvres\Personne;
                     <li>retirer intervenant - rolle staff</li>
                 </ul>
                 <?php
-                
+                 $magazine = new Periodique('Mad Movies', 'Le cinéma d\'horreur', [], 'mensuel', 'Horreur');
+                 $magazine->ajouterIntervenant(new Role('Editeur', new Personne('Kurl', 'Karl')));
+                 $magazine->ajouterIntervenant(new Role('Journaliste', new Personne('Kael', 'Mickael')));
+                 tools::prePrint($magazine);
                 ?>
             </article>
         </section>

@@ -40,9 +40,9 @@ class Film extends Oeuvre{
      *
      * @return  self
      */ 
-    public function setCasting($casting)
+    public function setCasting(Role $role)
     {
-        $this->casting = $casting;
+        array_push($this->casting, $role);
 
         return $this;
     }
@@ -108,11 +108,11 @@ class Film extends Oeuvre{
     }
 
     /* méthode de films */
-    public function ajouterActeur($acteur){
+    public function ajouterActeur(Role $acteur){
         $this->setCasting($acteur);
     }
 
-    public function retirerActeur($acteur){
-        
+    public function retirerActeur(Role $acteur){
+
     }
 }

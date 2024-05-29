@@ -56,9 +56,9 @@ class Oeuvre{
      *
      * @return  self
      */ 
-    public function setCreateurs($createurs)
+    public function setCreateurs(Createur $createur)
     {
-        $this->createurs = $createurs;
+        array_push($this->createurs, $createur);
 
         return $this;
     }
