@@ -36,11 +36,18 @@ use Doctrine\Common\Collections\ArrayCollection;
                     <li>Une description ou un résumé</li>
                 </ul>
                 <p>
+                    Toutes les oeuvres auront les méthodes suivantes
+                </p>
+                <ul>
+                    <li>ajoutcreateur</li>
+                    <li>supprcreateur</li>
+                </ul>
+                <p>
                     Les différents types d'oeuvres seront des classe enfants étandants la classe oeuvre mais ayant chacunes leurs particularités.
                 </p>
                 <h3>La classe Oeuvre</h3>
                 <?php
-                
+                echo time();
                 ?>
             </article>
         </section>
