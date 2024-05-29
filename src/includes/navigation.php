@@ -25,6 +25,9 @@ use Utils\Tools;
                     <a class="nav-link <?php Tools::classActive('classesetendues.php') ?>" href="./classesetendues.php" title="Les classes étendues">Classes étendues</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link <?php Tools::classActive('mediatheque.php') ?>" href="./mediatheque.php" title="Les classes étendues">TD - Exo Mediathèque</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link <?php Tools::classActive('classesetpdo.php') ?>" href="./classesetpdo.php" title="Les classes et PDO">Classe et PDO</a>
                 </li>
                 <li class="nav-item">

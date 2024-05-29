@@ -18,7 +18,8 @@
         "psr-4":{
           "App\\": "src/Classes",
           "Utils\\": "src/Classes",
-          "Media\\": "src/Classes"
+          "Media\\": "src/Classes",
+          "Oeuvres\\": "src/CLasses/Mediatheque"
         }
       }
 }
