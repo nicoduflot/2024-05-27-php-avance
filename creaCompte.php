@@ -2,6 +2,7 @@
 
 use App\Compte;
 use App\CompteCheque;
+use App\Carte;
 use Utils\Tools;
 
 require './vendor/autoload.php';
@@ -46,13 +47,13 @@ require './vendor/autoload.php';
                     $devise = '€';
                     switch ($typecompte) {
                         case 'Compte':
-                            //$uniqueid = 'CPT-'. time();
                             $compte = new Compte($nom, $prenom, $numcompte, $numagence, $rib, $iban, $solde, $devise);
                             $compte->enregCompte();
                             break;
                         case 'CompteCheque':
-                            //$uniqueid = 'CCP-'.time();
-                            break;
+                            $compte = new CompteCheque($nom, $prenom, $numcompte, $numagence, $rib, $iban, $_POST['numcarte'], $_POST['codepin'], $solde);
+                            $compte->enregCompte();
+                        break;
                         case 'CompteInteret':
                             //$uniqueid = 'CIT-'.time();
                             break;

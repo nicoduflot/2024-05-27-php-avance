@@ -299,7 +299,7 @@ class Compte{
         return $tabAttr;
     }
 
-    private function enreg($sql, $params){
+    protected function enreg($sql, $params){
         $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
         $request = $bdd->prepare($sql);
         $request->execute($params);
@@ -321,27 +321,11 @@ class Compte{
         ];
 
         $sql = 'INSERT INTO compte (
-            `uniqueid` ,
-            `typecompte` ,
-            `nom` ,
-            `prenom` ,
-            `numcompte` ,
-            `numagence` ,
-            `rib` ,
-            `iban` ,
-            `solde` ,
-            `devise`
+            `uniqueid` , `typecompte` , `nom` , `prenom` , `numcompte` ,
+            `numagence` , `rib` , `iban` , `solde` , `devise`
         ) VALUES (
-            :uniqueid,
-            :typecompte,
-            :nom,
-            :prenom,
-            :numcompte,
-            :numagence,
-            :rib,
-            :iban,
-            :solde,
-            :devise);';
+            :uniqueid, :typecompte, :nom, :prenom, :numcompte,
+            :numagence, :rib, :iban, :solde, :devise);';
         
         $this->enreg($sql, $params);
     }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Utils\Tools;
 
 class Carte{
     private $numcarte;
@@ -34,4 +35,14 @@ class Carte{
         return $this->codepin;
     }
     
+    public function enreg(){
+        $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
+        $sql = 'INSERT INTO `carte` (`cardnumber`, `codepin`) VALUES ( :cardnumber, :codepin) ;';
+        $params = ['cardnumber' => $this->getNumcarte(), 'codepin' => $this->getCodepin()];
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        $idcard = $bdd->lastInsertId();
+        $request->closeCursor();
+        return $idcard;
+    }
 }

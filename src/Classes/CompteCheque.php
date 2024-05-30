@@ -6,6 +6,7 @@ class CompteCheque extends Compte{
 
     /* Attributs */
     private $carte;
+    private $idcarte;
 
     /**
      * Compte constructor
@@ -19,6 +20,7 @@ class CompteCheque extends Compte{
      * @param string    codepin
      * @param float     solde
      * @param string    devise
+     * @param int       idcarte
      */
     public function __construct(
         $nom, $prenom, $numcompte,
@@ -60,6 +62,35 @@ class CompteCheque extends Compte{
         $numcarte = ''. CompteCheque::generatePin() . ' ' . CompteCheque::generatePin() . ' ' . CompteCheque::generatePin() . ' ' . CompteCheque::generatePin();
 
         return $numcarte;
+    }
+
+    public function enregCompte()
+    {
+        $idcarte = $this->getCarte()->enreg();
+
+        $params = [
+            'uniqueid' => 'CPT-'. time(),
+            'typecompte' => $this->typeCompte(),
+            'nom' => $this->getNom(),
+            'prenom' => $this->getPrenom(),
+            'numcompte' => $this->getNumcompte(),
+            'numagence' => $this->getNumagence(),
+            'rib' => $this->getRib(),
+            'iban' => $this->getIban(),
+            'solde' => $this->getSolde(),
+            'devise' => $this->getDevise(),
+            'cardid' => $idcarte
+            ];
+    
+            $sql = 'INSERT INTO compte (
+                `uniqueid` , `typecompte` , `nom` , `prenom` , `numcompte` ,
+                `numagence` , `rib` , `iban` , `solde` , `devise`, `cardid`
+            ) VALUES (
+                :uniqueid, :typecompte, :nom, :prenom, :numcompte,
+                :numagence, :rib, :iban, :solde, :devise, :cardid);';
+            
+            $this->enreg($sql, $params);
+
     }
 
 }
