@@ -41,40 +41,185 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                     <li><a href="./creaCompte.php?typecompte=CompteInteret">Un compte intérêt</a></li>
                 </ul>
             </article>
-            <article class="col-lg-6">
+            <article>
                 <header>
-                    <h2>Les comptes enregistré</h2>
+                    <h2>Les comptes enregistrés</h2>
                 </header>
                 <?php
-                $sqlCPT = 'SELECT * FROM `compte` WHERE `typecompte` = \'Compte\'';
+                $sqlCPT = '
+                    SELECT 
+                        * 
+                    FROM 
+                        `compte` 
+                    WHERE 
+                        `typecompte` = \'Compte\' 
+                    ORDER BY 
+                        `compte`.`nom`';
                 $request = Tools::querySelect($bdd, $sqlCPT);
-                while($compte = $request->fetch(PDO::FETCH_ASSOC)){
-                    Tools::prePrint($compte);
-                }
+                ?>
+                <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Numéro de compte</th>
+                            <th>Numéro d'agence</th>
+                            <th>RIB</th>
+                            <th>IBAN</th>
+                            <th>Solde</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while($compte = $request->fetch(PDO::FETCH_ASSOC)){
+                        //Tools::prePrint($compte);
+                        ?>
+                        <tr>
+                            <td><?php echo $compte['nom'] ?></td>
+                            <td><?php echo $compte['prenom'] ?></td>
+                            <td><?php echo $compte['numcompte'] ?></td>
+                            <td><?php echo $compte['numagence'] ?></td>
+                            <td><?php echo $compte['rib'] ?></td>
+                            <td><?php echo $compte['iban'] ?></td>
+                            <td><?php echo $compte['solde'] . ' ' . $compte['devise'] ?></td>
+                            <td>
+                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
+                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                </div>
+                <?php
+                $request->closeCursor();
                 ?>
             </article>
-            <article class="col-lg-6">
+            <article>
                 <header>
-                    <h2>Les comptes chèques enregistré</h2>
+                    <h2>Les comptes chèques enregistrés</h2>
                 </header>
                 <?php
-                $sqlCCP = 'SELECT * FROM `compte` WHERE `typecompte` = \'CompteCheque\'';
+                $sqlCCP = '
+                SELECT 
+                    * 
+                FROM 
+                    `compte` LEFT JOIN 
+                    `carte` on `compte`.`cardid` = `carte`.`id` 
+                WHERE 
+                    `typecompte` = \'CompteCheque\' 
+                ORDER BY 
+                    `compte`.`nom`';
                 $request = Tools::querySelect($bdd, $sqlCCP);
-                while($compte = $request->fetch(PDO::FETCH_ASSOC)){
-                    Tools::prePrint($compte);
-                }
+                ?>
+                <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Numéro de compte</th>
+                            <th>Numéro d'agence</th>
+                            <th>RIB</th>
+                            <th>IBAN</th>
+                            <th>Solde</th>
+                            <th>Numéro de carte</th>
+                            <th>Code Pin</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while($compte = $request->fetch(PDO::FETCH_ASSOC)){
+                        //Tools::prePrint($compte);
+                        ?>
+                        <tr>
+                            <td><?php echo $compte['nom'] ?></td>
+                            <td><?php echo $compte['prenom'] ?></td>
+                            <td><?php echo $compte['numcompte'] ?></td>
+                            <td><?php echo $compte['numagence'] ?></td>
+                            <td><?php echo $compte['rib'] ?></td>
+                            <td><?php echo $compte['iban'] ?></td>
+                            <td><?php echo $compte['solde'] . ' ' . $compte['devise'] ?></td>
+                            <td><?php echo $compte['cardnumber'] ?></td>
+                            <td><?php echo $compte['codepin'] ?></td>
+                            <td>
+                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
+                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                </div>
+                <?php
+                $request->closeCursor();
                 ?>
             </article>
-            <article class="col-lg-6">
+            <article>
                 <header>
                     <h2>Les comptes intérêts enregistrés</h2>
                 </header>
                 <?php
-                $sqlCIT = 'SELECT * FROM `compte` WHERE `typecompte` = \'CompteInteret\'';
+                $sqlCIT = '
+                SELECT 
+                    * 
+                FROM 
+                    `compte` 
+                WHERE 
+                    `typecompte` = \'CompteInteret\' 
+                ORDER BY 
+                    `compte`.`nom`';
                 $request = Tools::querySelect($bdd, $sqlCIT);
-                while($compte = $request->fetch(PDO::FETCH_ASSOC)){
-                    Tools::prePrint($compte);
-                }
+                ?>
+                <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Numéro de compte</th>
+                            <th>Numéro d'agence</th>
+                            <th>RIB</th>
+                            <th>IBAN</th>
+                            <th>Solde</th>
+                            <th>Taux d'intérêt</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while($compte = $request->fetch(PDO::FETCH_ASSOC)){
+                        //Tools::prePrint($compte);
+                        ?>
+                        <tr>
+                            <td><?php echo $compte['nom'] ?></td>
+                            <td><?php echo $compte['prenom'] ?></td>
+                            <td><?php echo $compte['numcompte'] ?></td>
+                            <td><?php echo $compte['numagence'] ?></td>
+                            <td><?php echo $compte['rib'] ?></td>
+                            <td><?php echo $compte['iban'] ?></td>
+                            <td><?php echo $compte['solde'] . ' ' . $compte['devise'] ?></td>
+                            <td><?php echo ($compte['taux']*100). '%' ?></td>
+                            <td>
+                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
+                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                </div>
+                <?php
+                $request->closeCursor();
                 ?>
             </article>
         </section>

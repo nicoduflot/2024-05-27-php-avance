@@ -6,7 +6,6 @@ class CompteCheque extends Compte{
 
     /* Attributs */
     private $carte;
-    private $idcarte;
 
     /**
      * Compte constructor

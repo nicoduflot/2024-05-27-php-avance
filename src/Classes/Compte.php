@@ -13,6 +13,7 @@ class Compte{
     private $iban;
     private $solde;
     private $devise;
+    private $uniqueid;
 
     /**
      * Compte constructor
@@ -33,7 +34,8 @@ class Compte{
         $rib,
         $iban,
         $solde = 0,
-        $devise = '€'
+        $devise = '€',
+        $uniqueid = null
     )
     {
         $this->nom = $nom;
@@ -44,6 +46,7 @@ class Compte{
         $this->iban = $iban;
         $this->solde = $solde;
         $this->devise = $devise;
+        $this->uniqueid = $uniqueid;
     }
 
     /* getters et setters */
@@ -237,6 +240,14 @@ class Compte{
     }
 
     /**
+     * Get the value of uniqueid
+     */ 
+    public function getUniqueid()
+    {
+        return $this->uniqueid;
+    }
+
+    /**
      * @return string
      */
     public function typeCompte() : string {
@@ -251,6 +262,12 @@ class Compte{
     public function modifierSolde($montant) : bool
     {
         $this->setSolde( $this->getSolde() + $montant);
+        if($this->getUniqueid() !== null){
+            $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
+            $sql = 'UPDATE `compte` SET `solde` = '.$this->getSolde().' WHERE `uniqueid` == :uniqueid';
+            $params = ['uniqueid' => $this->getUniqueid()];
+            Tools::queryUpdate($bdd, $sql, $params);
+        }
         return true;
     }
 
@@ -329,4 +346,6 @@ class Compte{
         
         $this->enreg($sql, $params);
     }
+
+    
 }

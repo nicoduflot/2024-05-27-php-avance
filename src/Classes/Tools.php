@@ -53,4 +53,11 @@ class Tools{
         $request->closeCursor();
         return $id;
     }
+    
+    public static function queryUpdate($bdd, $sql, $params){
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        $request->closeCursor();
+        return true;
+    }
 }
