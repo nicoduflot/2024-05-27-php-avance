@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `compte` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniqueid` (`uniqueid`),
   KEY `cardid` (`cardid`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 COMMIT;
 

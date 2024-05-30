@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Utils\Tools;
 
 class Compte{
     /* Attributs */
@@ -298,6 +299,50 @@ class Compte{
         return $tabAttr;
     }
 
-    
+    private function enreg($sql, $params){
+        $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        $request->closeCursor();
+    }
 
+    public function enregCompte(){
+        $params = [
+        'uniqueid' => 'CPT-'. time(),
+        'typecompte' => $this->typeCompte(),
+        'nom' => $this->nom,
+        'prenom' => $this->prenom,
+        'numcompte' => $this->numcompte,
+        'numagence' => $this->numagence,
+        'rib' => $this->rib,
+        'iban' => $this->iban,
+        'solde' => $this->solde,
+        'devise' => $this->devise
+        ];
+
+        $sql = 'INSERT INTO compte (
+            `uniqueid` ,
+            `typecompte` ,
+            `nom` ,
+            `prenom` ,
+            `numcompte` ,
+            `numagence` ,
+            `rib` ,
+            `iban` ,
+            `solde` ,
+            `devise`
+        ) VALUES (
+            :uniqueid,
+            :typecompte,
+            :nom,
+            :prenom,
+            :numcompte,
+            :numagence,
+            :rib,
+            :iban,
+            :solde,
+            :devise);';
+        
+        $this->enreg($sql, $params);
+    }
 }

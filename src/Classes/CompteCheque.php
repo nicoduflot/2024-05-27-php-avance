@@ -51,4 +51,15 @@ class CompteCheque extends Compte{
         return $message;
     }
 
+    public static function generatePin(){
+        $pin = ''. rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+        return $pin;
+    }
+
+    public static function generateCardNumber(){
+        $numcarte = ''. CompteCheque::generatePin() . ' ' . CompteCheque::generatePin() . ' ' . CompteCheque::generatePin() . ' ' . CompteCheque::generatePin();
+
+        return $numcarte;
+    }
+
 }

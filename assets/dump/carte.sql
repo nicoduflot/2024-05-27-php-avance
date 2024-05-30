@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `carte` (
   `cardnumber` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `codepin` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 COMMIT;
 
