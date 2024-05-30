@@ -39,4 +39,18 @@ class Tools{
         };
         return $bdd;
     }
+
+    public static function querySelect($bdd, $sql, $params = []){
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        return $request;
+    }
+    
+    public static function queryInsert($bdd, $sql, $params){
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        $id = $bdd->lastInsertId();
+        $request->closeCursor();
+        return $id;
+    }
 }

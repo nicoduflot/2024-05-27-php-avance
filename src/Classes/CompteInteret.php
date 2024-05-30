@@ -79,5 +79,32 @@ class CompteInteret extends Compte{
         return $message;
     }
 
+    public function enregCompte()
+    {
+        $params = [
+            'uniqueid' => 'CIT-'. time(),
+            'typecompte' => $this->typeCompte(),
+            'nom' => $this->getNom(),
+            'prenom' => $this->getPrenom(),
+            'numcompte' => $this->getNumcompte(),
+            'numagence' => $this->getNumagence(),
+            'rib' => $this->getRib(),
+            'iban' => $this->getIban(),
+            'solde' => $this->getSolde(),
+            'devise' => $this->getDevise(),
+            'taux' => $this->getTaux()
+            ];
+    
+            $sql = 'INSERT INTO compte (
+                `uniqueid` , `typecompte` , `nom` , `prenom` , `numcompte` ,
+                `numagence` , `rib` , `iban` , `solde` , `devise`, `taux`
+            ) VALUES (
+                :uniqueid, :typecompte, :nom, :prenom, :numcompte,
+                :numagence, :rib, :iban, :solde, :devise, :taux);';
+            
+            $this->enreg($sql, $params);
+
+    }
+
 
 }

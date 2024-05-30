@@ -3,6 +3,7 @@
 use App\Compte;
 use App\CompteCheque;
 use App\Carte;
+use App\CompteInteret;
 use Utils\Tools;
 
 require './vendor/autoload.php';
@@ -35,7 +36,6 @@ require './vendor/autoload.php';
                 </header>
                 <?php
                 if (isset($_POST['type'])) {
-                    Tools::prePrint($_POST);
                     $typecompte = $_POST['type'];
                     $nom = $_POST['nom'];
                     $prenom = $_POST['prenom'];
@@ -48,18 +48,25 @@ require './vendor/autoload.php';
                     switch ($typecompte) {
                         case 'Compte':
                             $compte = new Compte($nom, $prenom, $numcompte, $numagence, $rib, $iban, $solde, $devise);
-                            $compte->enregCompte();
                             break;
                         case 'CompteCheque':
-                            $compte = new CompteCheque($nom, $prenom, $numcompte, $numagence, $rib, $iban, $_POST['numcarte'], $_POST['codepin'], $solde);
-                            $compte->enregCompte();
-                        break;
+                            $compte = new CompteCheque($nom, $prenom, $numcompte, $numagence, $rib, $iban, $_POST['numcarte'], $_POST['codepin'], $solde, $devise);
+                            break;
                         case 'CompteInteret':
-                            //$uniqueid = 'CIT-'.time();
+                            $compte = new CompteInteret($nom, $prenom, $numcompte, $numagence, $rib, $iban, $solde, $devise, $_POST['taux']);
                             break;
                     }
-                ?>
-
+                    $compte->enregCompte();
+                    ?>
+                    <h3>Les compte suivant a été enregistré : </h3>
+                    <p>
+                        <?php
+                        echo $compte->infoCompte();
+                        ?>
+                    </p>
+                    <p>
+                    <a href="./classesetpdo.php"><button class="btn btn-outline-secondary btn-small" type="button">Retour à la page des comptes</button></a>
+                    </p>
                     <?php
                 } else {
                     if (isset($_GET['typecompte']) && $_GET['typecompte'] !== '') {

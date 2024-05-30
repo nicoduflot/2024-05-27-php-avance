@@ -69,7 +69,7 @@ class CompteCheque extends Compte{
         $idcarte = $this->getCarte()->enreg();
 
         $params = [
-            'uniqueid' => 'CPT-'. time(),
+            'uniqueid' => 'CCT-'. time(),
             'typecompte' => $this->typeCompte(),
             'nom' => $this->getNom(),
             'prenom' => $this->getPrenom(),
