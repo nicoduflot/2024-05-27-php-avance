@@ -28,10 +28,10 @@ use Utils\Tools;
                     <a class="nav-link <?php Tools::classActive('mediatheque.php') ?>" href="./mediatheque.php" title="Les classes étendues">TD - Exo Mediathèque</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php Tools::classActive('classesetpdo.php') ?>" href="./classesetpdo.php" title="Les classes et PDO">Classe et PDO</a>
+                    <a class="nav-link <?php Tools::classActive('exceptions.php') ?>" href="./exceptions.php" title="Les exceptions">Exceptions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php Tools::classActive('exceptions.php') ?>" href="./exceptions.php" title="Les exceptions">Exceptions</a>
+                    <a class="nav-link <?php Tools::classActive('classesetpdo.php') ?>" href="./classesetpdo.php" title="Les classes et PDO">Classe et PDO</a>
                 </li>
             </ul>
         </div>
