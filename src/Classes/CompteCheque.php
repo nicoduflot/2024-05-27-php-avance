@@ -23,9 +23,9 @@ class CompteCheque extends Compte{
      */
     public function __construct(
         $nom, $prenom, $numcompte,
-        $numagence, $rib, $iban, $numcarte, $codepin, $solde = 0, $devise = '€')
+        $numagence, $rib, $iban, $numcarte, $codepin, $solde = 0, $devise = '€', $uniqueid = null)
     {
-        parent::__construct($nom,$prenom,$numcompte,$numagence,$rib,$iban,$solde,$devise);
+        parent::__construct($nom,$prenom,$numcompte,$numagence,$rib,$iban,$solde,$devise, $uniqueid);
         $this->carte = new Carte($numcarte, $codepin);
     }
 

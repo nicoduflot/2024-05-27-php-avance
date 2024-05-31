@@ -85,8 +85,7 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                             <td><?php echo $compte['iban'] ?></td>
                             <td><?php echo $compte['solde'] . ' ' . $compte['devise'] ?></td>
                             <td>
-                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
-                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                                <a href="./gestionCompte.php?action=show&uniqueid=<?php echo $compte['uniqueid'] ?>" title="Voir le compte"><button class="btn btn-primary btn-small"><i class="bi bi-card-text"></i></button></a>
                             </td>
                         </tr>
                         <?php
@@ -148,8 +147,7 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                             <td><?php echo $compte['cardnumber'] ?></td>
                             <td><?php echo $compte['codepin'] ?></td>
                             <td>
-                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
-                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                                <a href="./gestionCompte.php?action=show&uniqueid=<?php echo $compte['uniqueid'] ?>" title="Voir le compte"><button class="btn btn-primary btn-small"><i class="bi bi-card-text"></i></button></a>
                             </td>
                         </tr>
                         <?php
@@ -208,8 +206,7 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                             <td><?php echo $compte['solde'] . ' ' . $compte['devise'] ?></td>
                             <td><?php echo ($compte['taux']*100). '%' ?></td>
                             <td>
-                                <a href="/gestionCompte.php?action=edit&id=<?php echo $compte['id'] ?>" title="Éditer le compte"><button class="btn btn-secondary btn-small"><i class="bi bi-pencil-fill"></i></button></a>
-                                <a href="/gestionCompte.php?action=supp&id=<?php echo $compte['id'] ?>" title="Supprimer le compte"><button class="btn btn-danger btn-small"><i class="bi bi-trash-fill"></i></button></a>
+                                <a href="./gestionCompte.php?action=show&uniqueid=<?php echo $compte['uniqueid'] ?>" title="Voir le compte"><button class="btn btn-primary btn-small"><i class="bi bi-card-text"></i></button></a>
                             </td>
                         </tr>
                         <?php

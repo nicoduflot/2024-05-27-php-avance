@@ -21,9 +21,9 @@ class CompteInteret extends Compte{
      */
     public function __construct(
         $nom, $prenom, $numcompte,
-        $numagence, $rib, $iban, $solde = 0, $devise = '€', $taux = 0.03)
+        $numagence, $rib, $iban, $solde = 0, $devise = '€', $taux = 0.03, $uniqueid = null)
     {
-        parent::__construct($nom,$prenom,$numcompte,$numagence,$rib,$iban,$solde,$devise);
+        parent::__construct($nom,$prenom,$numcompte,$numagence,$rib,$iban,$solde,$devise, $uniqueid);
         $this->taux = $taux;
     }
 

@@ -23,7 +23,7 @@ class Compte{
      * @param string $numagence
      * @param string $rib
      * @param string $iban
-     * @param float $solde
+     * @param float  $solde
      * @param string $devise
      */
     public function __construct(
@@ -344,6 +344,36 @@ class Compte{
             :uniqueid, :typecompte, :nom, :prenom, :numcompte,
             :numagence, :rib, :iban, :solde, :devise);';
         
+        $this->enreg($sql, $params);
+    }
+
+    public function modCompte(){
+        $params = [
+        'uniqueid' => $this->uniqueid,
+        'nom' => $this->nom,
+        'prenom' => $this->prenom,
+        'numcompte' => $this->numcompte,
+        'numagence' => $this->numagence,
+        'rib' => $this->rib,
+        'iban' => $this->iban,
+        'solde' => $this->solde,
+        'devise' => $this->devise
+        ];
+
+        $sql = '
+        UPDATE `compte` SET 
+        `uniqueid` = :uniqueid,
+        `nom` = :nom,
+        `prenom` = :prenom,
+        `numcompte` = :numcompte,
+        `numagence` = :numagence,
+        `rib` = :rib,
+        `iban` = :iban,
+        `solde` = :solde,
+        `devise` = :devise
+        WHERE `uniqueid` = :uniqueid;
+        ';
+
         $this->enreg($sql, $params);
     }
 

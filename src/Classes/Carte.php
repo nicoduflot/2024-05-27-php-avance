@@ -45,4 +45,28 @@ class Carte{
         $request->closeCursor();
         return $idcard;
     }
+
+    /**
+     * Set the value of numcarte
+     *
+     * @return  self
+     */ 
+    public function setNumcarte($numcarte)
+    {
+        $this->numcarte = $numcarte;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of codepin
+     *
+     * @return  self
+     */ 
+    public function setCodepin($codepin)
+    {
+        $this->codepin = $codepin;
+
+        return $this;
+    }
 }
