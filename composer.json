@@ -19,7 +19,8 @@
       "App\\": "src/Classes",
       "Utils\\": "src/Classes",
       "Media\\": "src/Classes",
-      "Oeuvres\\": "src/Classes/Mediatheque"
+      "Oeuvres\\": "src/Classes/Mediatheque",
+      "Wargame\\": "src/Classes/Wargame"
     }
   }
 }

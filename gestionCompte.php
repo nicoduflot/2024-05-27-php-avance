@@ -4,7 +4,6 @@ session_start();
 
 use App\Compte;
 use App\CompteCheque;
-use App\Carte;
 use App\CompteInteret;
 use Utils\Tools;
 
@@ -155,7 +154,6 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                                                     <td colspan="2"><?php echo $compte->getNumcompte() ?></td>
                                                 </tr>
                                                 <tr>
-
                                                     <th>Numéro d'agence</th>
                                                     <th>RIB</th>
                                                     <th>IBAN</th>
@@ -363,7 +361,6 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                             break;
                         case 'supp':
                             $compte = unserialize($_SESSION['compte']);
-                            //tools::prePrint($compte);
                             ?>
                             <form method="post" action="./gestionCompte.php">
                                 <input type="hidden" name="uniqueid" id="uniqueid" value="<?php echo $compte->getUniqueid() ?>" />

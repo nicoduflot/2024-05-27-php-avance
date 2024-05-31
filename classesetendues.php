@@ -6,6 +6,7 @@ require './src/Classes/InternUser.class.php';
 use Utils\Tools;
 use App\CompteCheque;
 use App\CompteInteret;
+use Wargame\Commandant;
 
 ?>
 <!DOCTYPE html>
@@ -122,6 +123,12 @@ use App\CompteInteret;
                 <p>
                     Donc les méthodes déclarées dans l'interface devront être publiques (elles sont implémentées en dehors de l'interface) et les constantes de l'interface ne pourront pas être écrasées par la classe qui en hérite.
                 </p>
+                <!--
+                Interface : 
+                https://www.pierre-giraud.com/php-mysql-apprendre-coder-cours/oriente-objet-interface/
+                Interface et factory :
+                https://medrhamnia.wordpress.com/2015/07/10/php-comprendre-le-design-pattern-factory/
+                -->
             </article>
             <article>
                 <header>
@@ -238,6 +245,45 @@ use App\CompteInteret;
                 $jcdelacompta = new InternUser('Jean Christophe Ballain');
                 $jcdelacompta->setPrixAbo();
                 Tools::prePrint($jcdelacompta);
+                ?>
+            </article>
+        </section>
+        <section class="row">
+            <article>
+                <header>
+                    <h2>les design pattern Factory</h2>
+                </header>
+                <!--
+                    https://tainix.fr/code/Design-Pattern-en-PHP-Factory
+                -->
+                <h3>Principe</h3>
+                <p>
+                    La factory est une "usine à objets".
+                </p>
+                <p>
+                    C'est une classe sans constructeur mais qui possède une méthode statique qui permet de renvoyer des instances d'autres classes.
+                </p>
+                <p>
+                    Par exemple, pour créer un compte de base on fait <code>$compte = new Compte(<param du compte>);</code>
+                </p>
+                <p>
+                    une factory permettrai d'écrire <code>$compte = CompteFactory::creerCompte('Compte', ['clef' => valeurs, ...]);</code>
+                </p>
+                <p>
+                    Pour créer un compte chèque <code>$compte = CompteFactory::creerCompte('CompteCheque',  ['clef' => valeurs, ...]);</code>
+                </p>
+                <p>
+                    Ici, à la création du compte, au lieu d'avoit le détenteur dans l'objet compte, le détenteur serai un objet Detenteur, défini avec une partie des paramètre, et ensuite ajouté au compte.
+                </p>
+                <p>
+                    Exemple suivant vue ici : <a href="https://tainix.fr/code/Design-Pattern-en-PHP-Factory" target="_blank">Tainix</a>
+                </p>
+                <?php
+                $daenerys = new Commandant(50000);
+                // La liste des troupes à "recruter" pour la bataille !
+                $daenerys->determineTroops(['Dragons', 'Cavaliers']);
+                Tools::prePrint($daenerys);
+                Tools::prePrint($daenerys->getComposition());
                 ?>
             </article>
         </section>
