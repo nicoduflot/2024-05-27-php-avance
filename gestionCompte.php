@@ -54,8 +54,6 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                     switch($_POST['action']){
                         case 'edit':
                             $compte = unserialize($_SESSION['compte']);
-                            //Tools::prePrint($compte);
-                            //Tools::prePrint($_POST);
                             $compte->setNom($_POST['nom']);
                             $compte->setPrenom($_POST['prenom']);
                             $compte->setNumagence($_POST['numagence']);
@@ -68,13 +66,20 @@ $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
                                 $compte->setTaux($_POST['taux']);
                             }
                             $_SESSION['compte'] = serialize($compte);
-                            //Tools::prePrint($compte);
                             $_SESSION['alertmodif'] = true;
                             $compte->modCompte();
                             header('location:./gestionCompte.php?action=show&uniqueid='.$compte->getUniqueid());
                             break;
                         case 'supp':
                             echo 'tata';
+                            $compte = unserialize($_SESSION['compte']);
+                            if($compte->typeCompte() === 'CompteCheque'){
+                                $compte->getCarte()->removeSelf();
+                            }
+                            $compte->removeSelf();
+                            unset($_SESSION['compte']);
+                            $compte = null;
+                            header('location:./classesetpdo.php');
                             break;
                     }
                 }

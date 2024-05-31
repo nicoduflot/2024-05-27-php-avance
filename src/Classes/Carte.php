@@ -69,4 +69,14 @@ class Carte{
 
         return $this;
     }
+
+    public function removeSelf(){
+        $bdd = Tools::setBdd('localhost', '2024-05-27-php-avance');
+        $sql = 'DELETE FROM `carte` WHERE `cardnumber` = :cardnumber AND `codepin` = :codepin;';
+        $params = ['cardnumber' => $this->getNumcarte(), 'codepin' => $this->getCodepin()];
+        $request = $bdd->prepare($sql);
+        $request->execute($params);
+        $request->closeCursor();
+        return true;
+    }
 }

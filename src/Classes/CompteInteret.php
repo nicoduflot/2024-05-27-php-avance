@@ -23,7 +23,7 @@ class CompteInteret extends Compte{
         $nom, $prenom, $numcompte,
         $numagence, $rib, $iban, $solde = 0, $devise = '€', $taux = 0.03, $uniqueid = null)
     {
-        parent::__construct($nom,$prenom,$numcompte,$numagence,$rib,$iban,$solde,$devise, $uniqueid);
+        parent::__construct($nom, $prenom, $numcompte, $numagence, $rib, $iban, $solde, $devise, $uniqueid);
         $this->taux = $taux;
     }
 
@@ -104,6 +104,38 @@ class CompteInteret extends Compte{
             
             $this->enreg($sql, $params);
 
+    }
+
+    public function modCompte(){
+        $params = [
+        'uniqueid' => $this->getUniqueid(),
+        'nom' => $this->getNom(),
+        'prenom' => $this->getPrenom(),
+        'numcompte' => $this->getNumcompte(),
+        'numagence' => $this->getNumagence(),
+        'rib' => $this->getRib(),
+        'iban' => $this->getIban(),
+        'solde' => $this->getSolde(),
+        'devise' => $this->getDevise(),
+        'taux' => $this->getTaux()
+        ];
+
+        $sql = '
+        UPDATE `compte` SET 
+        `uniqueid` = :uniqueid,
+        `nom` = :nom,
+        `prenom` = :prenom,
+        `numcompte` = :numcompte,
+        `numagence` = :numagence,
+        `rib` = :rib,
+        `iban` = :iban,
+        `solde` = :solde,
+        `devise` = :devise,
+        `taux` = :taux
+        WHERE `uniqueid` = :uniqueid;
+        ';
+
+        $this->enreg($sql, $params);
     }
 
 

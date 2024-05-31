@@ -377,5 +377,11 @@ class Compte{
         $this->enreg($sql, $params);
     }
 
+    public function removeSelf(){
+        $sql = 'DELETE FROM `compte` WHERE `uniqueid` = :uniqueid;';
+        $params = ['uniqueid' => $this->getUniqueid()];
+        $this->enreg($sql, $params);
+        return true;
+    }
     
 }
